@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0
+}
+.box {
+  overflow: hidden;
+  width: 560px;
+  margin: 10px auto;
+  position: relative;
+}
+h1 {
+  text-align: center;
+  font-size: 1.4em;
+}
+.wrap {
+  height: 120px;
+  padding: 0 10px;
+  position: relative;
+}
+
+.item {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  float: left;
+  background: #eee;
+  margin-top: 10px;
+  position: absolute;
+  z-index: 0;
+}
+.navigate {
+  text-align: center;
+  margin: 10px;
+}
+#next, #prev {
+  padding: 5px 15px;
+  margin: 10px;
+}
+
+
+#demo0 {
+  width: 560px;
+}
+
+#demo0 .item {
+  width: 540px;
+}
