@@ -76,7 +76,7 @@ function init( box, config ) {
     // 修正 margin-left
     // 修正 config.index
     // 修正 p.to
-    if ( o >= length * 2 || o + per >= length * 2 ) {
+    if ( o + per >= length * 2 ) {
       left = ( p.from - length ) * ( pw + fixed );
       config.index = p.to = p.from - length + step;
     }
