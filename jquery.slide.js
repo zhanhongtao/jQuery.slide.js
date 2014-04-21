@@ -1,7 +1,7 @@
 /**
   可定制化 Slide - 依赖 jQuery!
   @author redky@qq.com
-  @update: 2014-04-19
+  @update: 2014-04-22
 */
 
 $.slide = function( config ) {
@@ -17,6 +17,7 @@ $.slide = function( config ) {
   // 实例化 slide.
   var slide = $({});
   slide.debug = !!config.debug;
+  slide.version = '0.1';
   var timer;
   var noop = $.noop;
   var stop = 0;
@@ -102,10 +103,6 @@ $.slide = function( config ) {
     var rotate = config.rotate;
     var max = rotate ? config.length - 1 : Math.max(0, config.length-config.per);
     var o = to;
-    // debug
-    if ( slide.debug ) {
-      log( 'from: ', from, '; to: ', to, '; direction:', direction, '; max: ', max );
-    }
     // to.
     if ( rotate ) {
       to = to > max ? to - max - 1 : to < 0 ? to + max + 1 : to;
@@ -114,7 +111,7 @@ $.slide = function( config ) {
       to = to > max ? max : to < 0 ? 0 : to;
     }
     if ( slide.debug ) {
-      log( 'from: ', from, '; to: ', to, '; direction:', direction, '; max: ', max );
+      log( 'from: ', from, '; to: ', to, '; direction:', direction, '; o:', o, '; max: ', max );
     }
     var index = config.index = to;
     slide.trigger( key, {
