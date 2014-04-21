@@ -104,7 +104,7 @@ function init( box, config ) {
   initNavigator();
 
   var setting = $.extend({
-    count: length,
+    length: length,
     onchange: function(e,p) {
       go(p);
     }

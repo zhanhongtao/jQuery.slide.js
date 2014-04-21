@@ -4,20 +4,6 @@
   @update: 2014-04-19
 */
 
-/**
-  @support:
-  * next/prev/go
-  * auto
-  * rotate
-  * pause/resume
-  * before/change/after events
-  * stopImmediatePropagation/stopPropagation
-  * destory
-  * per/step
-  * getConfig
-  * debug
-*/
-
 $.slide = function( config ) {
   var defaultSetting = {
     index: 0,
@@ -114,7 +100,7 @@ $.slide = function( config ) {
     from = typeof from == 'undefined' ? config.index : ~~from;
     var direction = to > from ? 1 : -1;
     var rotate = config.rotate;
-    var max = rotate ? config.count - 1 : Math.max(0, config.count-config.per);
+    var max = rotate ? config.length - 1 : Math.max(0, config.length-config.per);
     // debug
     if ( slide.debug ) {
       log( 'from: ', from, '; to: ', to, '; direction:', direction, '; max: ', max );
