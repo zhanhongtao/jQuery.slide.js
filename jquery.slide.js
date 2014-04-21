@@ -16,7 +16,7 @@ $.slide = function( config ) {
   config = $.extend( {}, defaultSetting, config );
   // 实例化 slide.
   var slide = $({});
-  slide.debug = 1;
+  slide.debug = !!config.debug;
   var timer;
   var noop = $.noop;
   var stop = 0;
@@ -98,9 +98,10 @@ $.slide = function( config ) {
     }
     to = ~~to;
     from = typeof from == 'undefined' ? config.index : ~~from;
-    var direction = to > from ? 1 : -1;
+    var direction = to === from ? 0 : to > from ? 1 : -1;
     var rotate = config.rotate;
     var max = rotate ? config.length - 1 : Math.max(0, config.length-config.per);
+    var o = to;
     // debug
     if ( slide.debug ) {
       log( 'from: ', from, '; to: ', to, '; direction:', direction, '; max: ', max );
@@ -115,12 +116,13 @@ $.slide = function( config ) {
     if ( slide.debug ) {
       log( 'from: ', from, '; to: ', to, '; direction:', direction, '; max: ', max );
     }
+    var index = config.index = to;
     slide.trigger( key, {
+      o: o,
       to: to,
       from: from,
       direction: direction
     });
-    var index = config.index = to;
     if ( index === max && !rotate ) {
       if ( timer ) clearTimeout( timer );
     }
