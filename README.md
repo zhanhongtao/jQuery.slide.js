@@ -3,7 +3,7 @@ jQuery.slide.js
 
 可定制化 jQuery slide 扩展
 
-demo: http://zhanhongtao.github.io/jquery.slide.js/index.html
+demo: http://zhanhongtao.github.io/jQuery.slide.js/index.html
 
 
 ## 使用方法
