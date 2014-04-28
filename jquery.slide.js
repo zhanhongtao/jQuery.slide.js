@@ -20,7 +20,6 @@ $.slide = function( config ) {
   var timer;
   var noop = $.noop;
   var stop = 0;
-  };
   // 支持 stopPropagation 和 stopImmediatePropagation.
   // stopPropagation 不再执行后续事件.
   // stopImmediatePropagation 不再执行当前其它事件函数和后续事件.
