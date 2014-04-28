@@ -5,15 +5,7 @@
 */
 
 $.slide = function( config ) {
-  var defaultSetting = {
-    index: 0,
-    rotate: 0,
-    timeout: 5,
-    auto: 0,
-    step: 1,
-    per: 1
-  };
-  config = $.extend( {}, defaultSetting, config );
+  config = $.extend( {}, $.slide.setting, config );
   // 实例化 slide.
   var slide = $({});
   slide.version = '0.1';
@@ -157,3 +149,13 @@ $.slide = function( config ) {
   slide.go( config.index );
   return slide;
 };
+
+$.slide.setting = {
+  index: 0,
+  rotate: 0,
+  timeout: 5,
+  auto: 0,
+  step: 1,
+  per: 1  
+};
+
