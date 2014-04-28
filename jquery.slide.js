@@ -16,17 +16,10 @@ $.slide = function( config ) {
   config = $.extend( {}, defaultSetting, config );
   // 实例化 slide.
   var slide = $({});
-  slide.debug = !!config.debug;
   slide.version = '0.1';
   var timer;
   var noop = $.noop;
   var stop = 0;
-  var log = function() {
-    if ( console && console.log ) {
-      try {
-        console.log.apply( console, arguments );
-      }catch(e) {}
-    }
   };
   // 支持 stopPropagation 和 stopImmediatePropagation.
   // stopPropagation 不再执行后续事件.
@@ -109,9 +102,6 @@ $.slide = function( config ) {
     }
     else {
       to = to > max ? max : to < 0 ? 0 : to;
-    }
-    if ( slide.debug ) {
-      log( 'from: ', from, '; to: ', to, '; direction:', direction, '; o:', o, '; max: ', max );
     }
     var index = config.index = to;
     slide.trigger( key, {
