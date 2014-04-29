@@ -1,7 +1,7 @@
 /**
-  可定制化 jQuery.slide.js 插件
+  可定制化 jquery.slide.js 插件
   @author redky@qq.com
-  @update: 2014-04-28
+  @update: 2014-04-29
 */
 
 ;(function($) {
@@ -24,7 +24,7 @@
       sp: false,
       sip: false
     };
-    var stopImmediatePropagation = function(e) {
+    var stopImmediatePropagation = function() {
       flag.sip = flag.sp = true;
     };
     var stopPropagation = function() {
@@ -40,7 +40,7 @@
         e.stopPropagation = stopPropagation;
         e.stopImmediatePropagation = stopImmediatePropagation;
         $.each( events, function( index, cb ) {
-          var r = cb.apply( slide, _arguments );
+          cb.apply( slide, _arguments );
           if ( flag.sip === true ) {
             flag.sip = false;
             return false;
@@ -156,7 +156,7 @@
     per: 1  
   };
   
-  $.slide.version = '0.1.1';  
+  $.slide.version = '0.1.2';  
   
 })(jQuery);
 

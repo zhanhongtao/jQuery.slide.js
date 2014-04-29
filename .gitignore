@@ -1,2 +1,4 @@
 
-/demo
+demo
+node_modules
+*.map

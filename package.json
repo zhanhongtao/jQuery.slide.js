@@ -1,0 +1,24 @@
+{
+  "name": "jquery.slide.js",
+  "description": "可定制化、无UI jQuery 插件",
+  "author": "redky@qq.com",
+  "version": "0.1.2",
+  "keywords": [ "jQuery", "slide" ],
+  "homepage": "http://github.com/zhanhongtao/jQuery.slide.js",
+  "bugs": {
+    "url": "http://github.com/zhanhongtao/jQuery.slide.js/issues",
+    "email": "redky@qq.com"
+  },
+  "license": {
+    "license": "MIT"
+  },
+  "main": "./jquery.slide.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/zhanhongtao/jQuery.slide.js/"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.3.0"
+  }
+}
