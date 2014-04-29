@@ -4,15 +4,12 @@
   @update: 2014-04-28
 */
 
-;(function($, undefined) {
+;(function($) {
   
   $.slide = function( setting ) {
     var config = $.extend( {}, $.slide.setting, setting );
     // 实例化 slide.
-    var slide = $({});
-    var timer;
-    var noop = $.noop;
-    var stop = 0;
+    var slide = $({}), timer, noop = $.noop, stop = 0;
     // 支持 stopPropagation 和 stopImmediatePropagation.
     // stopPropagation 不再执行后续事件.
     // stopImmediatePropagation 不再执行当前其它事件函数和后续事件.
