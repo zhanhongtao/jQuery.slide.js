@@ -5,7 +5,7 @@
 */
 
 ;(function($) {
-  
+
   $.slide = function( setting ) {
     var config = $.extend( {}, $.slide.setting, setting );
     // 实例化 slide.
@@ -58,6 +58,7 @@
       if ( method ) {
         method.push( cb );
       }
+      return this;
     };
     slide.off = function( name, cb ) {
       var method = eventMap[ name ];
@@ -70,6 +71,7 @@
       $.each( list.reverse(), function( i, index ) {
         method.splice( index, 1 );
       });
+      return this;
     };
 
     // 导航.
@@ -102,34 +104,39 @@
         if ( timer ) clearTimeout( timer );
       }
       else if ( !stop && config.auto ) {
-        slide.auto();
+        slide.play();
       }
-
+      return this;
     };
     slide.next = function() {
       var from = config.index,
           to = from + config.step;
       slide.go( to, from );
+      return this;
     };
     slide.prev = function() {
       var from = config.index,
           to = from - config.step;
       slide.go( to, from );
+      return this;
     };
 
     // 停止 + 继续
     slide.pause = function() {
       if ( timer ) clearTimeout( timer );
       stop = 1;
+      return this;
     };
     slide.resume = function() {
       stop = 0;
-      slide.auto();
+      slide.play();
+      return this;
     };
-    slide.auto = function() {
+    slide.play = function() {
       timer = setTimeout(function() {
         slide.next();
       }, config.timeout * 1000 );
+      return this;
     };
     slide.getConfig = function() {
       return config;
@@ -141,7 +148,7 @@
       slide.on( method, config[ 'on' + method ] || noop );
     });
     if ( config.auto ) {
-      slide.auto();
+      slide.play();
     }
     slide.go( config.index );
     return slide;
@@ -153,10 +160,10 @@
     timeout: 5,
     auto: 0,
     step: 1,
-    per: 1  
+    per: 1
   };
-  
-  $.slide.version = '0.1.2';  
-  
+
+  $.slide.version = '0.2.0';
+
 })(jQuery);
 

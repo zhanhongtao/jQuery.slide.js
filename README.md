@@ -24,7 +24,7 @@ jQuery.slide.js
 * go( index )
 * next()
 * prev()
-* auto()       手动设置开启 auto 时, 需要手动调用一次.
+* play()       手动播放
 * pause()      auto 开启时, 停止 auto.
 * resume()     auto 开启时, 继续 auto.
 
@@ -45,10 +45,10 @@ slide.on( 'before', function( e, p ) {
   // p.from                       从索引 from 切换来.
   // p.direction                  切换的方向 -1/1
   // p.o                          切换到索引的原始值. to 为处理过的值.
-  // e.stopImmediatePropagation() 
+  // e.stopImmediatePropagation()
   // e.stopPropagation()
 });
 ```
 
-@Update 2014-04-28
+@Update 2014-05-05
 
