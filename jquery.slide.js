@@ -1,9 +1,3 @@
-/**
-  可定制化 jquery.slide.js 插件
-  @author redky@qq.com
-  @update: 2014-04-29
-*/
-
 ;(function($) {
 
   $.slide = function( setting ) {
@@ -162,8 +156,6 @@
     step: 1,
     per: 1
   };
-
-  $.slide.version = '0.2.0';
 
 })(jQuery);
 
