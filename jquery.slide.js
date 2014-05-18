@@ -1,5 +1,12 @@
-;(function($) {
-
+;(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    factory(require('jquery'));
+  } else {
+    factory(jQuery);
+  }
+})(function( $ ) {
   $.slide = function( setting ) {
     var config = $.extend( {}, $.slide.setting, setting );
     // 实例化 slide.
@@ -147,7 +154,6 @@
     slide.go( config.index );
     return slide;
   };
-
   $.slide.setting = {
     index: 0,
     rotate: 0,
@@ -156,6 +162,5 @@
     step: 1,
     per: 1
   };
-
-})(jQuery);
-
+  return $;
+});
