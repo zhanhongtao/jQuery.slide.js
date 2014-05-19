@@ -58,7 +58,7 @@
         var per = setting.per;
         var step = setting.step;
         // 停止当前动画.
-        box.find(selector + ':animated').stop( true, true, true );
+        box.find(':animated').stop( true, true, true );
         var direction = p.direction, to = p.to;
         var wrap = box.find( '.' + wrapClassName );
         var left = false;
