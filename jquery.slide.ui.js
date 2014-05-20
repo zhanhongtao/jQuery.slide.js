@@ -32,20 +32,22 @@
       var box = $(this);
       // 准备工作.
       var items = box.find( selector );
-      var length = items.length;
       var pw = items.width();
       var fixed = config.fixed;
       var fixedWidth = pw + fixed;
       var wrapClassName = config.wrapClassName;
+      var length = items.length;
+
+      // 修正节点长度.
+      if ( config.rotate ) {
+        items.parent().append( items.clone() );
+        items = box.find( selector);
+      }
       
       // 添加 wrap 节点.
       var fragment = $('<div/>', { 'class': wrapClassName });
-      if ( config.rotate ) {
-        box.append( items.clone() );
-        items = box.find( selector);
-      }
-      fragment.width( (config.rotate ? 2 : 1 ) * length * fixedWidth );
-      items.wrapAll( fragment );
+      fragment.width( ( config.rotate ? 2 : 1 ) * length * fixedWidth );
+      items.parent().wrapAll( fragment );
       
       // 切换.
       function onChange( e, p ) {
@@ -61,7 +63,7 @@
         var step = setting.step;
         var direction = p.direction, to = p.to;
         var wrap = box.find( '.' + wrapClassName );
-        wrap.stop( true, true, true );
+        wrap.stop( true, !!config.dumptoend );
         var left = false;
         if ( !setting.rotate ) {
           return;
@@ -118,7 +120,8 @@
     fixed: 10,
     // 可扩展 jQuery.easing. https://github.com/danro/jquery-easing
     effect: 'swing',
-    duration: 400
+    duration: 400,
+    dumptoend: true
   };
 
   return $;
