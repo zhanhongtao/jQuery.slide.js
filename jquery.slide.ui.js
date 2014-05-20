@@ -57,10 +57,9 @@
         var setting = this.getConfig();
         var per = setting.per;
         var step = setting.step;
-        // 停止当前动画.
-        box.find(':animated').stop( true, true, true );
         var direction = p.direction, to = p.to;
         var wrap = box.find( '.' + wrapClassName );
+        wrap.stop( true, true, true );
         var left = false;
         if ( !setting.rotate ) {
           return;
