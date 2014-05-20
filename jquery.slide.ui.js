@@ -26,33 +26,35 @@
     factory(jQuery);
   }
 })(function( $ ) {
-
   $.fn.slide = function( selector, config ) {
     config = $.extend( {}, $.fn.slide.setting, config );
     return this.each(function() {
       var box = $(this);
+      // 准备工作.
       var items = box.find( selector );
       var length = items.length;
       var pw = items.width();
       var fixed = config.fixed;
+      var fixedWidth = pw + fixed;
       var wrapClassName = config.wrapClassName;
+      
+      // 添加 wrap 节点.
       var fragment = $('<div/>', { 'class': wrapClassName });
       if ( config.rotate ) {
         box.append( items.clone() );
         items = box.find( selector);
       }
-      fragment.width( (config.rotate ? 2 : 1 ) * length * (pw+fixed) );
+      fragment.width( (config.rotate ? 2 : 1 ) * length * fixedWidth );
       items.wrapAll( fragment );
       
+      // 切换.
       function onChange( e, p ) {
-        var to = p.to;
-        var wrap = box.find( '.' + wrapClassName );
-        var left = to * ( pw + fixed );
-        wrap.animate({
-          'margin-left': -1 * left
+        box.find( '.' + wrapClassName ).animate({
+          'margin-left': -1 * p.to * fixedWidth
         }, config.duration, config.effect );
       }
 
+      // 做相应 fix.
       function onBefore(e, p) {
         var setting = this.getConfig();
         var per = setting.per;
@@ -66,7 +68,7 @@
         }
         // 初始化 - 放到中间.
         if ( direction === 0 ) {
-          left = length * (pw+fixed);
+          left = length * fixedWidth;
           setting.index = p.to = length;
         }
 
@@ -75,11 +77,11 @@
         // 修正 setting.index
         // 修正 p.to
         if ( o + per >= length * 2 ) {
-          left = ( p.from - length ) * ( pw + fixed );
+          left = ( p.from - length ) * fixedWidth;
           setting.index = p.to = p.from - length + step;
         }
         else if ( o < 0 ) {
-          left = ( p.from + length ) * ( pw + fixed );
+          left = ( p.from + length ) * fixedWidth;
           setting.index = p.to = p.from + length - step;
         }
 
@@ -90,6 +92,17 @@
 
       var setting = $.extend( config, { length: config.rotate ? length * 2 : length });
       var slide = $.slide( setting );
+      
+      var go = slide.go;
+      slide.go = function( id ) {
+        var index = id;
+        if ( typeof index === 'string' ) {
+          index = box.find( selector ).filter( '#' + id ).index();
+          if ( index === -1 ) return;
+        }
+        go( index );
+      };
+      
       slide.on( 'before', onBefore ).on( 'change', onChange );
       box.data( 'slide', slide );
       
