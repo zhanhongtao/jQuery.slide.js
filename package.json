@@ -3,7 +3,7 @@
   "description": "可定制化、无UI jQuery 插件",
   "author": "redky@qq.com",
   "version": "0.2.2",
-  "uiversion": "0.2.1",
+  "uiversion": "0.2.2",
   "keywords": [ "jQuery", "slide" ],
   "homepage": "http://github.com/zhanhongtao/jQuery.slide.js",
   "bugs": {

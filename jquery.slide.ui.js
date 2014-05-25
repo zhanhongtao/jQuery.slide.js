@@ -26,10 +26,18 @@
     factory(jQuery);
   }
 })(function( $ ) {
+  var getid = (function() {
+    var id = 0;
+    return function() {
+      return id++;
+    };
+  })();
+  var slidekey = '__slide';
   $.fn.slide = function( selector, config ) {
     config = $.extend( {}, $.fn.slide.setting, config );
-    return this.each(function() {
-      var box = $(this);
+    return this.each(function( index ) {
+      var _id = getid();
+      var box = $(this).data( slidekey, _id );
       // 准备工作.
       var items = box.find( selector );
       var pw = items.width();
@@ -47,7 +55,9 @@
       // 添加 wrap 节点.
       var fragment = $('<div/>', { 'class': wrapClassName });
       fragment.width( ( config.rotate ? 2 : 1 ) * length * fixedWidth );
-      items.parent().wrapAll( fragment );
+      
+      var parent = items.parent();
+      ( parent.data( slidekey ) === _id ? items : parent ).wrapAll(fragment);
       
       // 切换.
       function onChange( e, p ) {
