@@ -11,9 +11,11 @@ h1 {
   text-align: center;
   font-size: 1.4em;
 }
+
+ul, li { list-style: none }
+
 .wrap {
   height: 120px;
-  padding: 0 10px;
 }
 
 .item {
@@ -33,11 +35,6 @@ h1 {
 #next, #prev {
   padding: 5px 15px;
   margin: 10px;
-}
-
-
-#demo0, #demo1 {
-  width: 560px;
 }
 
 #demo0 .item,
