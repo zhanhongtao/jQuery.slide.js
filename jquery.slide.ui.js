@@ -48,13 +48,13 @@
       if ( direction === 'horizontal' ) {
         style.direction = 'height';
         style.margin = 'margin-top';
-        style.size   = items.outerHeight();
+        style.size   = items.outerHeight( true );
         style.fixed  = style.size + config.fixed;
       }
       else {
         style.direction = 'width';
         style.margin = 'margin-left';
-        style.size   = items.outerWidth();
+        style.size   = items.outerWidth( true );
         style.fixed  = style.size + config.fixed;
       }
 
@@ -141,7 +141,7 @@
   $.fn.slide.setting = {
     wrapClassName: 'wrap',    // 插件包条目时指定的类名
     item: 'item',             // 默认找元素下的 item
-    fixed:  10,               // 对屏之间间距修正
+    fixed: 0,                 // 对屏之间间距修正
     effect: 'swing',          // 可扩展 jQuery.easing. https://github.com/danro/jquery-easing
     duration: 400,            // 切换所需时长
     dumptoend: true,          // jQuery.stop() 第二个参数.
