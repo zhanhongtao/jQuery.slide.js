@@ -14,6 +14,10 @@ h1 {
 
 ul, li { list-style: none }
 
+.demo {
+  margin: 10px;
+}
+
 .wrap {
   height: 120px;
 }
@@ -37,7 +41,16 @@ ul, li { list-style: none }
   margin: 10px;
 }
 
-#demo0 .item,
-#demo1 .item {
+#demo1 .item,
+#demo2 .item {
   width: 540px;
+}
+
+#horizontal {
+  height: 100px;
+  overflow: hidden;
+}
+#horizontal .item {
+  width: 540px;
+  margin: 0;
 }

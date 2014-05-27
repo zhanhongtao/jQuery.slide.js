@@ -1,11 +1,22 @@
 
 var boxSettings = [
   {
+    title: '上下切换',
+    length: 5,
+    rotate: 1,
+    fixed: 0,
+    duration: 300,
+    wrap: '>ul',
+    direction: 'horizontal',
+    id: 'horizontal'    
+  },
+  {
     title: '单条-循环',
     length: 5,
     rotate: 1,
     pw: 540,
-    duration: 600
+    duration: 800,
+    wrap: '>ul'
   }, {
     title: '单条-循环-自动(2s)',
     length: 5,
@@ -70,33 +81,37 @@ var boxSettings = [
   }
 ];
 
+
+// boxSettings.length = 1;
+
 var body = $( 'body' );
 var ctemplate = $( '#ctpl' ).html();
 var ntemplate = $( '#ntpl' ).html();
 
 $.each(boxSettings, function( index, setting ) {
-  var _clone = $(ctemplate).clone().attr( 'id', 'demo' + index );
+  var wrap = $( '<div class="demo"/>' );
+  var _clone = $(ctemplate).clone().attr( 'id', setting.id || 'demo' + index );
   _clone.find( '.item' ).remove( '.item:nth-child(n + '+ (setting.length+1) + ')' );
+  wrap.append( _clone );
   var hn = $( '<h1>' + setting.title + '</h1>' );
-  _clone.prepend( hn );
-  _clone.append( $(ntemplate).clone() );
-  body.append( _clone );
+  wrap.prepend( hn );
+  wrap.append( $(ntemplate).clone() );
+  body.append( wrap );
 });
 
 $( '.box' ).each(function( index, box ) {
   $( box ).slide( '.item', boxSettings[index] );
 });
 
-$( '.box' ).on( 'click', '#next', function(e) {
-  var target = e.delegateTarget;
-  var slide = $( target ).data( 'slide' );
+$( '.demo' ).on( 'click', '#next', function(e) {
+  var box = $( e.delegateTarget ).find( '.box' );
+  var slide = box.data( 'slide' );
   slide.next();
 });
 
-$( '.box' ).on( 'click', '#prev', function(e) {
-  var target = e.delegateTarget;
-  var slide = $( target ).data( 'slide' );
+$( '.demo' ).on( 'click', '#prev', function(e) {
+  var box = $( e.delegateTarget ).find( '.box' );
+  var slide = box.data( 'slide' );
   slide.prev();
 });
-
 
