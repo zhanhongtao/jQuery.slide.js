@@ -35,35 +35,51 @@
   var slidekey = '__slide';
   $.fn.slide = function( selector, config ) {
     config = $.extend( {}, $.fn.slide.setting, config );
-    return this.each(function( index ) {
+    return this.each(function() {
       var _id = getid();
       var box = $(this).data( slidekey, _id );
+      var direction = config.direction;
+      var style = {};
+
       // 准备工作.
       var items = box.find( selector );
-      var pw = items.width();
-      var fixed = config.fixed;
-      var fixedWidth = pw + fixed;
-      var wrapClassName = config.wrapClassName;
       var length = items.length;
+      
+      if ( direction === 'horizontal' ) {
+        style.direction = 'height';
+        style.margin = 'margin-top';
+        style.size   = items.outerHeight();
+        style.fixed  = style.size + config.fixed;
+      }
+      else {
+        style.direction = 'width';
+        style.margin = 'margin-left';
+        style.size   = items.outerWidth();
+        style.fixed  = style.size + config.fixed;
+      }
 
+      // 设置 wrap 节点.
+      var fragment = box.find( config.wrap );
+      var parent = items.parent();
+      if ( fragment.length === 0 ) {
+        var wrapClassName = config.wrapClassName;
+        fragment = $('<div/>', { 'class': wrapClassName });
+        ( parent.data( slidekey ) === _id ? items : parent ).wrapAll(fragment);
+        fragment = box.find( '.' + wrapClassName );
+      }
+      fragment.css( style.direction, ( config.rotate ? 2 : 1 ) * length * style.fixed );
+      
       // 修正节点长度.
       if ( config.rotate ) {
-        items.parent().append( items.clone() );
+        parent.append( items.clone() );
         items = box.find( selector);
       }
-      
-      // 添加 wrap 节点.
-      var fragment = $('<div/>', { 'class': wrapClassName });
-      fragment.width( ( config.rotate ? 2 : 1 ) * length * fixedWidth );
-      
-      var parent = items.parent();
-      ( parent.data( slidekey ) === _id ? items : parent ).wrapAll(fragment);
-      
+
       // 切换.
       function onChange( e, p ) {
-        box.find( '.' + wrapClassName ).animate({
-          'margin-left': -1 * p.to * fixedWidth
-        }, config.duration, config.effect );
+        var _config = {};
+        _config[ style.margin ] = -1 * p.to * style.fixed;
+        fragment.animate( _config, config.duration, config.effect );
       }
 
       // 做相应 fix.
@@ -71,16 +87,17 @@
         var setting = this.getConfig();
         var per = setting.per;
         var step = setting.step;
-        var direction = p.direction, to = p.to;
-        var wrap = box.find( '.' + wrapClassName );
-        wrap.stop( true, !!config.dumptoend );
-        var left = false;
+        var direction = p.direction;
+        fragment.stop( true, !!config.dumptoend );
+        
+        var padding = false;
         if ( !setting.rotate ) {
           return;
         }
+        
         // 初始化 - 放到中间.
         if ( direction === 0 ) {
-          left = length * fixedWidth;
+          padding = length * style.fixed;
           setting.index = p.to = length;
         }
 
@@ -89,16 +106,16 @@
         // 修正 setting.index
         // 修正 p.to
         if ( o + per >= length * 2 ) {
-          left = ( p.from - length ) * fixedWidth;
+          padding = ( p.from - length ) * style.fixed;
           setting.index = p.to = p.from - length + step;
         }
         else if ( o < 0 ) {
-          left = ( p.from + length ) * fixedWidth;
+          padding = ( p.from + length ) * style.fixed;
           setting.index = p.to = p.from + length - step;
         }
 
-        if ( left !== false ) {
-          wrap.css( 'margin-left', -1 * left );
+        if ( padding !== false ) {
+          fragment.css( style.margin, -1 * padding );
         }
       }
 
@@ -122,16 +139,14 @@
   };
 
   $.fn.slide.setting = {
-    // 插件包条目时指定的类名
-    wrapClassName: 'wrap',
-    // 默认找元素下的 item
-    item: 'item',
-    // 对屏之间间距修正
-    fixed: 10,
-    // 可扩展 jQuery.easing. https://github.com/danro/jquery-easing
-    effect: 'swing',
-    duration: 400,
-    dumptoend: true
+    wrapClassName: 'wrap',    // 插件包条目时指定的类名
+    item: 'item',             // 默认找元素下的 item
+    fixed:  10,               // 对屏之间间距修正
+    effect: 'swing',          // 可扩展 jQuery.easing. https://github.com/danro/jquery-easing
+    duration: 400,            // 切换所需时长
+    dumptoend: true,          // jQuery.stop() 第二个参数.
+    wrap: null,               // 可手动指定 wrap 元素 - selector/dom/jQueryObject
+    direction: 'vertical'     // 左右/上下方向切换
   };
 
   return $;
