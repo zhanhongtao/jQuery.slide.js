@@ -38,7 +38,7 @@
     return this.each(function() {
       var _id = getid();
       var box = $(this).data( slidekey, _id );
-      var direction = config.direction;
+      var direction = config.direction || config.orientation;
       var style = {};
 
       // 准备工作.
@@ -146,7 +146,7 @@
     duration: 400,            // 切换所需时长
     dumptoend: true,          // jQuery.stop() 第二个参数.
     wrap: null,               // 可手动指定 wrap 元素 - selector/dom/jQueryObject
-    direction: 'vertical'     // 左右/上下方向切换
+    orientation: 'vertical'   // 左右/上下方向切换
   };
 
   return $;
