@@ -89,7 +89,7 @@
       var o = to;
       // to.
       if ( rotate ) {
-        to = to > max ? to - max - 1 : to < 0 ? to + max + 1 : to;
+        to = ( max + to % max ) % max;
       }
       else {
         to = to > max ? max : to < 0 ? 0 : to;
