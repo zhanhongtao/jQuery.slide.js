@@ -68,10 +68,11 @@
         fragment = box.find( '.' + wrapClassName );
       }
       fragment.css( style.direction, ( config.rotate ? 2 : 1 ) * length * style.fixed );
+
       
       // 修正节点长度.
       if ( config.rotate ) {
-        parent.append( items.clone() );
+        fragment.append( items.clone() );
         items = box.find( selector);
       }
 
