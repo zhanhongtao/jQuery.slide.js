@@ -112,26 +112,22 @@
     slide.next = function() {
       var from = config.index,
           to = from + config.step;
-      slide.go( to, from );
-      return this;
+      return slide.go( to, from );
     };
     slide.prev = function() {
       var from = config.index,
           to = from - config.step;
-      slide.go( to, from );
-      return this;
+      return slide.go( to, from );
     };
 
     // 停止 + 继续
     slide.pause = function() {
       if ( timer ) clearTimeout( timer );
-      stop = 1;
-      return this;
+      return stop = 1, this;
     };
     slide.resume = function() {
       stop = 0;
-      slide.play();
-      return this;
+      return slide.play();
     };
     slide.play = function() {
       timer = setTimeout(function() {
@@ -139,8 +135,11 @@
       }, config.timeout * 1000 );
       return this;
     };
+    slide.config = function(setting) {
+      return $.extend( config, setting, $.noop );
+    };
     slide.getConfig = function() {
-      return config;
+      return this.config();
     };
 
     // 对外提供 before/change/after 事件.
