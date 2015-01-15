@@ -2,24 +2,35 @@
   margin: 0;
   padding: 0
 }
+
+li {
+  list-style: none;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.other {
+  line-height: 1.5;
+}
+.other h1 {
+  text-align: left;
+}
+
+p {
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
 .box {
   overflow: hidden;
   width: 540px;
   margin: 10px auto;
-}
-h1 {
-  text-align: center;
-  font-size: 1.4em;
-}
-
-ul, li { list-style: none }
-
-.demo {
-  margin: 10px;
-}
-
-.wrap {
-  height: 120px;
+  background: #fefefe;
 }
 
 .item {
@@ -32,25 +43,23 @@ ul, li { list-style: none }
   margin-top: 10px;
   margin-right: 10px;
 }
+
 .navigate {
   text-align: center;
   margin: 10px;
 }
-#next, #prev {
+
+.next, .prev {
   padding: 5px 15px;
   margin: 10px;
 }
 
-#demo1 .item,
-#demo2 .item {
-  width: 540px;
-}
-
-#horizontal {
+.full {
   height: 100px;
   overflow: hidden;
 }
-#horizontal .item {
+
+.full .item {
   width: 540px;
   margin: 0;
 }

@@ -3,48 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <title>jQuery.slide.js</title>
-  <link rel="stylesheet" href="slide.margin.css">
+  <link rel="stylesheet" href="demo.css">
 </head>
 <body>
-  <script type="text/html" id="c2tpl">
-    <div class="box">
-      <div class="item">1</div>
-      <div class="item">2</div>
-      <div class="item">3</div>
-      <div class="item">4</div>
-      <div class="item" id="t5">5</div>
-      <div class="item">6</div>
-      <div class="item">7</div>
-      <div class="item">8</div>
-      <div class="item">9</div>
-      <div class="item">10</div>
-    </div>  
-  </script>
-  <script type="text/html" id="ctpl">
-    <div class="box">
-      <ul>
-        <li class="item">1</li>
-        <li class="item">2</li>
-        <li class="item">3</li>
-        <li class="item">4</li>
-        <li class="item">5</li>
-        <li class="item">6</li>
-        <li class="item">7</li>
-        <li class="item">8</li>
-        <li class="item">9</li>
-        <li class="item">10</li>
-      </ul>
-    </div>
-  </script>
-  <script type="text/html" id="ntpl">
-    <div class="navigate">
-      <button id="prev">Prev</button>
-      <button id="next">Next</button>
-    </div>
-  </script>
-  <script src="jquery.1.11.0.min.js"></script>
-  <script src="jquery.slide.0.2.2.min.js"></script>
-  <script src="jquery.slide.ui.0.3.1.min.js"></script>
-  <script src="demo.margin.js"></script>
+
+<!-- 说明 .box 是为了样式, 和 slide 无关 -->
+<div class="box">
+  <h1>基础版</h1>
+  <div id="basic" class="full">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="basic">previous</button>
+    <button class="next" data-for="basic">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>垂直方向</h1>
+  <div id="horizontal" class="full">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="horizontal">previous</button>
+    <button class="next" data-for="horizontal">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>可循环切换</h1>
+  <div id="rotate" class="full">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="rotate">previous</button>
+    <button class="next" data-for="rotate">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>自动切换</h1>
+  <div id="auto" class="full">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box">
+  <h1>自动切换, 并制定切换时间间隔</h1>
+  <div id="auto-timeout" class="full">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box">
+  <h1>按 group 切换</h1>
+  <div id="group">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+      <li class="item">6</li>
+      <li class="item">7</li>
+      <li class="item">8</li>
+      <li class="item">9</li>
+      <li class="item">10</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="group">previous</button>
+    <button class="next" data-for="group">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>按 group 自动切换</h1>
+  <div id="auto-group">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+      <li class="item">6</li>
+      <li class="item">7</li>
+      <li class="item">8</li>
+      <li class="item">9</li>
+      <li class="item">10</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="auto-group">previous</button>
+    <button class="next" data-for="auto-group">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>按 group 显示, 但按单个切换</h1>
+  <div id="single-group">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+      <li class="item">6</li>
+      <li class="item">7</li>
+      <li class="item">8</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="single-group">previous</button>
+    <button class="next" data-for="single-group">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>按组显示, 指定切换个数</h1>
+  <div id="fixed-group">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+      <li class="item">6</li>
+      <li class="item">7</li>
+      <li class="item">8</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="fixed-group">previous</button>
+    <button class="next" data-for="fixed-group">next</button>
+  </div>
+</div>
+
+<div class="box">
+  <h1>按组显示, 指定切换个数, 但不循环</h1>
+  <div id="fixed-group-manual">
+    <ul>
+      <li class="item">1</li>
+      <li class="item">2</li>
+      <li class="item">3</li>
+      <li class="item">4</li>
+      <li class="item">5</li>
+      <li class="item">6</li>
+      <li class="item">7</li>
+      <li class="item">8</li>
+    </ul>
+  </div>
+  <div class="navigate">
+    <button class="prev" data-for="fixed-group-manual">previous</button>
+    <button class="next" data-for="fixed-group-manual">next</button>
+  </div>
+</div>
+
+<div class="box other">
+  <h1>其他:</h1>
+  <ul>
+    <li>index: 指定从第几条开始切换
+    <li>effect: 指定切换效果 - https://github.com/danro/jquery-easing
+    <li>dumptoend: 是否直接跳到结束
+  </ul>
+</div>
+
+<script src="jquery.1.11.0.min.js"></script>
+<script src="jquery.slide.0.2.2.min.js"></script>
+<script src="jquery.slide.ui.0.3.1.min.js"></script>
+<script src="demo.js"></script>
+
 </body>
 </html>
